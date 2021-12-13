@@ -3,11 +3,10 @@ const router = require('express')
 
 const {userController} = require('../controllers');
 const {userMiddleware, authMiddleware, fileMiddleware} = require('../middlewares');
-const {userRoles: {ADMIN,MANAGER}} = require('../configs');
+const {userRoles: {ADMIN}} = require('../configs');
 
 router.get(
     '/',
-    authMiddleware.checkAccessToken,
     userMiddleware.checkUserRole([ADMIN]),
     userController.getUsers);
 
@@ -26,9 +25,9 @@ router.put(
 
 router.delete(
     '/:user_id',
-    authMiddleware.checkAccessToken,
     userMiddleware.checkUserRole([ADMIN]),
     userMiddleware.checkUserIdMiddleware,
+    authMiddleware.checkAccessToken,
     userController.deleteUser);
 
 router.get(
@@ -43,25 +42,5 @@ router.put(
     userMiddleware.updateUserMiddleware,
     userMiddleware.checkUserIdMiddleware,
     userController.updateUser);
-
-router.post(
-    '/:user_id/block',
-    authMiddleware.checkAccessToken,
-    userMiddleware.checkUserRole([
-        ADMIN,
-        MANAGER
-    ]),
-    userMiddleware.checkUserIdMiddleware,
-    userController.blockUser);
-
-router.post(
-    '/:user_id/unblock',
-    authMiddleware.checkAccessToken,
-    userMiddleware.checkUserRole([
-        ADMIN,
-        MANAGER
-    ]),
-    userMiddleware.checkUserIdMiddleware,
-    userController.unblockUser);
 
 module.exports = router;

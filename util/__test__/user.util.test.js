@@ -1,4 +1,4 @@
-const {userUtil} = require('../index');
+const {userUtil} = require('../../../../Desktop/util');
 const objNorm = [
     {
         input:

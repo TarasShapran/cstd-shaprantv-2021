@@ -1,7 +1,7 @@
 const {User} = require('../dataBase');
 const {userValidator} = require('../validators');
 const ErrorHandler = require('../errors/ErrorHandler');
-const {constants, userStatusEnum} = require('../configs');
+const {constants} = require('../configs');
 
 module.exports = {
     isUserEmailExistMiddleware: async (req, res, next) => {
@@ -81,10 +81,6 @@ module.exports = {
                 throw new ErrorHandler(constants.WRONG_EMAIL_OR_PASSWORD, constants.BAD_REQUEST);
             }
 
-            if (+userByEmail.status!==userStatusEnum.ACTIVE){
-                throw new ErrorHandler(constants.ACCOUNT_IS_BLOCKED, constants.FORBIDDEN);
-            }
-
             req.user = userByEmail;
 
             next();
@@ -96,7 +92,6 @@ module.exports = {
     checkUserRole: (roleArr = []) => (req, res, next) => {
         try {
             const {role} = req.user;
-
             if (!roleArr.includes(role)) {
                 throw new ErrorHandler(constants.ACCESS_DENIED, constants.FORBIDDEN);
             }

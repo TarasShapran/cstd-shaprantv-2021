@@ -2,7 +2,7 @@ const {userNormalizator} = require('../util/user.util');
 const {jwtService, emailService} = require('../service');
 const {O_Auth, User, ActionToken} = require('../dataBase');
 const ErrorHandler = require('../errors/ErrorHandler');
-const {constants,config} = require('../configs');
+const {constants} = require('../configs');
 
 module.exports = {
     login: async (req, res, next) => {

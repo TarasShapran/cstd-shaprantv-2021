@@ -32,25 +32,5 @@ module.exports = {
     [emailActionsEnum.COME_BACK]: {
         templateName: 'come-back.pug',
         subject: 'Come back'
-    },
-    [emailActionsEnum.APARTMENT_RESERVED]: {
-        templateName: 'landlord-booking.pug',
-        subject: 'Rent'
-    },
-    [emailActionsEnum.RESERVED]: {
-        templateName: 'tenant-booking.pug',
-        subject: 'Rent'
-    },
-    [emailActionsEnum.APPROVE_TO_RESERVE]: {
-        templateName: 'approve-to-reserve',
-        subject: 'Approve'
-    },
-    [emailActionsEnum.WAITING_FOR_CONFIRM]: {
-        templateName: 'waiting-for-confirmation',
-        subject: 'Confirm'
-    },
-    [emailActionsEnum.REFUSE_TO_RENT]: {
-        templateName: 'refuse-to-rent',
-        subject: 'Refuse'
     }
 };
