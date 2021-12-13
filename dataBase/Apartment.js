@@ -35,16 +35,11 @@ const apartmentSchema = new Schema({
         required: true
     },
     star_rating: {
-        type: Number,
-        default:null
+        type: Number
     },
     description: {
         type: String,
         required: true
-    },
-    approve: {
-        type: Boolean,
-        default: false
     },
     user_id: {
         type: Schema.Types.ObjectId,
@@ -53,10 +48,6 @@ const apartmentSchema = new Schema({
     },
     photo: {
         type: String
-    },
-    price: {
-        type: Number,
-        required: true
     }
 }, {timestamps: true, toObject: {virtuals: true}, toJSON: {virtuals: true}});
 
