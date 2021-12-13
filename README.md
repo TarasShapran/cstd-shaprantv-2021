@@ -1,10 +1,19 @@
-Student: Shapran Taras 
-Group: CE-48
-Subject: CSDT
+Student: Shapran Taras Group: CE-48 Subject: CSDT
 
-Project name: tic-tac-toe game
-Programming language: 
+Project name: tic-tac-toe game Programming language:
 
-Additional tools/utils: Bash, Make
-HW interface: SPI
-Data driven format: BINARY
+Additional tools/utils: Bash, Make HW interface: SPI Data driven format: BINARY
+
+BD:
+
+- В даному проекті використовується база даних MongoDb
+- MongoDb - документо-орієнтована система керування базами даних з відкритим вихідним кодом, яка не потребує опису схеми таблиць.
+  MongoDB займає нішу між швидкими і масштабованими системами, що оперують даними у форматі ключ/значення, і реляційними
+  СКБД, функціональними і зручними у формуванні запитів.
+- Для підключення та використання бази даних використовую бібліотеку mongoose.
+- Було створено 6 колекцій:
+  1. User - для зберігання користувачів, менеджерів та адміна
+  2. O_Auth - для зберігання токенів призначених юзерові при реєстрації 
+  3. Apartment - тут записуються дані про житло яке здають 
+  4. ActionToken - збереження токенів для відновлення чи зміни паролю
+  5. Booking - зберігається бронювання помешкання 
