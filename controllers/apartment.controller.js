@@ -5,7 +5,7 @@ const {apartmentService} = require('../service');
 module.exports = {
     createApartment: async (req, res, next) => {
         try {
-            const {user_id} = req.params;
+            const {_id:user_id} = req.user;
 
             const apartment = await Apartment.create({...req.body, user_id});
 
@@ -50,8 +50,39 @@ module.exports = {
         try {
             const {apartment_id} = req.params;
 
-            const newApartment = await Apartment.findByIdAndUpdate(apartment_id, req.body, {new: true})
-                .lean();
+            const newApartment = await Apartment.findByIdAndUpdate(apartment_id, req.body, {new: true});
+
+            res.json(newApartment)
+                .status(constants.CREATED);
+        } catch (err) {
+            next(err);
+        }
+    },
+
+    addStarToApartment: async (req, res, next) => {
+        try {
+            const {apartment_id} = req.params;
+
+            const _id = apartment_id.toString();
+
+            const {star} = req.body;
+
+            const apartment = await Apartment.findOne({_id});
+
+            let newApartment;
+
+            if (!apartment.star_rating) {
+                newApartment = await Apartment.findByIdAndUpdate(_id, {star_rating: star}, {new: true});
+
+                res.json(newApartment)
+                    .status(constants.CREATED);
+
+                return;
+            }
+
+            const avgStar = Math.round(((apartment.star_rating + star) / 2) * 100) / 100;
+
+            newApartment = await Apartment.findByIdAndUpdate(_id, {star_rating: avgStar}, {new: true});
 
             res.json(newApartment)
                 .status(constants.CREATED);

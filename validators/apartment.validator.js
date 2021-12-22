@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const { apartmentTypeEnum} = require('../configs');
+const {apartmentTypeEnum} = require('../configs');
 
 const createApartmentValidator = Joi.object({
     country: Joi
@@ -41,15 +41,23 @@ const createApartmentValidator = Joi.object({
     amount_of_places: Joi
         .number()
         .required(),
-    star_rating: Joi
+    price: Joi
         .number()
         .required(),
-    price:Joi
-        .number()
-        .required()
+    approve: Joi
+        .boolean()
 
 });
 
+const isStarPresentValidator = Joi.object({
+    star: Joi
+        .number()
+        .min(1)
+        .max(5)
+        .required()
+});
+
 module.exports = {
-    createApartmentValidator
+    createApartmentValidator,
+    isStarPresentValidator
 };
